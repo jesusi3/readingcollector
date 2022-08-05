@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Novel List</h1>
+
+{% for reading in readings %}
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">{{ reading.title }}</span>
+      <p>Genre: {{ reading.genre }}</p>
+      <p>Description: {{ reading.description }}</p>
+        <p>Author: {{ reading.author }}</p>
+    </div>
+  </div>
+{% endfor %}
+
+{% endblock %}
