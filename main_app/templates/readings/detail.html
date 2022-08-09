@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<h1>Novel Details</h1>
+
+<div class="card">
+    <div class="card-content">
+      <span class="card-title">{{ reading.title }}</span>
+      <p>Genre: {{ reading.genre }}</p>
+      <p>Description: {{ reading.description|linebreaks }}</p>
+      <p>Author: {{ reading.author }}</p>
+    </div>
+    <div class="card-action">
+        <a href="{% url 'readings_update' reading.id %}">Edit</a>
+        <a href="{% url 'readings_delete' reading.id %}">Delete</a>
+      </div>
+  </div>
+
+
+
+
+{% endblock %}
