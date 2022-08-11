@@ -4,20 +4,53 @@
 
 <h1>Novel Details</h1>
 
-<div class="card">
-    <div class="card-content">
-      <span class="card-title">{{ reading.title }}</span>
-      <p>Genre: {{ reading.genre }}</p>
-      <p>Description: {{ reading.description|linebreaks }}</p>
-      <p>Author: {{ reading.author }}</p>
+<div class="row">
+    <div class="col s6">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">{{ reading.title }}</span>
+                <p>Genre: {{ reading.genre }}</p>
+                <p>Description: {{ reading.description|linebreaks }}</p>
+                <p>Author: {{ reading.author }}</p>
+            </div>
+            <div class="card-action">
+                <a href="{% url 'readings_update' reading.id %}">Edit</a>
+                <a href="{% url 'readings_delete' reading.id %}">Delete</a>
+            </div>
+        </div>
     </div>
-    <div class="card-action">
-        <a href="{% url 'readings_update' reading.id %}">Edit</a>
-        <a href="{% url 'readings_delete' reading.id %}">Delete</a>
-      </div>
-  </div>
-
-
-
-
+    <div class="col s6">
+        
+        <form action="{% url 'add_bookmark' reading.id %}" method="POST">
+            {% csrf_token %}
+            {{ bookmark_form.as_p }}
+            <button class="btn" type="submit"> Add Bookmark</button>
+          </form>
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Chapter</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for bookmark in reading.bookmark_set.all %}
+                <tr>
+                    <td>{{bookmark.date}}</td>
+                    <td>{{bookmark.chapter}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+const dateEl = document.getElementById('id_date');
+  M.Datepicker.init(dateEl, {
+    format: 'yyyy-mm-dd',
+    defaultDate: new Date(),
+    setDefaultDate: true,
+    autoClose: true
+  });
+</script>
 {% endblock %}

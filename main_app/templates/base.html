@@ -8,6 +8,7 @@
   <title>Reading Collector</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 </head>
 <body>
@@ -19,6 +20,8 @@
         </ul>
         <ul class="right">
           <li><a href="{% url 'about' %}">About</a></li>
+          <li><a href="{% url 'badges_create' %}">Create a Badge</a></li>
+          <li><a href="{% url 'badges_index' %}">Badge List</a></li>
           <li><a href="{% url 'readings_create' %}">Add a Novel</a></li>
           <li><a href="{% url 'index' %}">View All My Novels</a></li>
         </ul>
