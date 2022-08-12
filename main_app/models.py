@@ -32,6 +32,7 @@ class Reading(models.Model):
     genre = models.CharField(max_length=100)
     description = models.TextField(max_length=2500)
     author = models.CharField(max_length=100)
+    badges = models.ManyToManyField(Badge)
 
     def __str__(self):
         return self.title

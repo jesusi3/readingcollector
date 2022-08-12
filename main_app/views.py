@@ -16,9 +16,12 @@ def readings_index(request):
 
 def readings_detail(request, reading_id):
   reading = Reading.objects.get(id=reading_id)
+  id_list = reading.badges.all().values_list('id')
+  badges_reading_doesnt_have = Badge.objects.exclude(id__in=id_list)
   bookmark_form = BookMarkForm()
   return render(request, 'readings/detail.html', {
-    'reading': reading, 'bookmark_form': bookmark_form
+    'reading': reading, 'bookmark_form': bookmark_form,
+    'badges': badges_reading_doesnt_have
     })
 
 class ReadingCreate(CreateView):
@@ -39,6 +42,14 @@ def add_bookmark(request, reading_id):
     new_bookmark = form.save(commit=False)
     new_bookmark.reading_id = reading_id
     new_bookmark.save()
+  return redirect('detail', reading_id=reading_id)
+
+def assoc_badge(request, reading_id, badge_id):
+  Reading.objects.get(id=reading_id).badges.add(badge_id)
+  return redirect('detail', reading_id=reading_id)
+
+def unassoc_badge(request, reading_id, badge_id):
+  Reading.objects.get(id=reading_id).badges.remove(badge_id)
   return redirect('detail', reading_id=reading_id)
 
 class BadgeList(ListView):
