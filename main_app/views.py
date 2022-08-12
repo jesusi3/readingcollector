@@ -26,7 +26,7 @@ def readings_detail(request, reading_id):
 
 class ReadingCreate(CreateView):
   model = Reading
-  fields = '__all__'
+  fields = ['title','genre','description', 'author']
 
 class ReadingUpdate(UpdateView):
   model = Reading
